@@ -1,0 +1,26 @@
+{
+    "name": "rask/wplog",
+    "description": "WordPress logging system plugin",
+    "type": "wordpress-plugin",
+    "keywords": ["wordpress", "log", "logging", "plugin"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Otto Rask",
+            "email": "ojrask+wplog@gmail.com",
+            "homepage": "http://www.ottorask.com",
+            "role": "Project lead"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Wplog\\": "classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wplog\\Tests\\": "tests/"
+        }
+    }
+}
