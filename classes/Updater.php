@@ -94,7 +94,9 @@ class Updater
 
         $this->pluginBasename = basename($this->pluginId, '.php');
 
-        $this->pluginFilePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'wplog.php';
+        $this->pluginFilePath = dirname(__DIR__) .
+            DIRECTORY_SEPARATOR .
+            basename($this->pluginId);
 
         add_filter('pre_set_site_transient_update_plugins', function ($transient) {
             return $this->filterPluginUpdatesTransient($transient);

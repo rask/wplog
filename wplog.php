@@ -14,6 +14,8 @@ namespace Wplog;
 * Domain Path: /languages
 */
 
+define('WPLOG_VERSION', '0.1.0');
+define('WPLOG_DB_VERSION', 1);
 define('WPLOG_DIR', __DIR__);
 define('WPLOG_GITHUB_REPO_ID', null);
 define('WPLOG_PLUGIN_DIR_ID', basename(__DIR__) . '/' . basename(__FILE__));
@@ -22,6 +24,27 @@ define('WPLOG_PLUGIN_DIR_ID', basename(__DIR__) . '/' . basename(__FILE__));
  * Autoloading.
  */
 require_once(__DIR__ . '/vendor/autoload.php');
+
+global $wplog;
+
+/**
+ * Get the plugin instance.
+ *
+ * @since 0.1.0
+ * @return \Wplog\Plugin
+ */
+function wplog()
+{
+    global $wplog;
+
+    if (!$wplog instanceof Plugin) {
+        $wplog = new Plugin();
+    }
+
+    return $wplog;
+}
+
+wplog()->initialize();
 
 /**
  * Run updater.

@@ -22,5 +22,9 @@
         "psr-4": {
             "Wplog\\Tests\\": "tests/"
         }
+    },
+    "require": {
+        "ramsey/uuid": "^3.0",
+        "psr/log": "^1.0"
     }
 }
