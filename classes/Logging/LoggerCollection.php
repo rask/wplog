@@ -70,4 +70,15 @@ class LoggerCollection
             $logger->write($event);
         }
     }
+
+    /**
+     * Get the currently defined loggers for this collection.
+     *
+     * @since 0.1.0
+     * @return \Wplog\Logging\LogAdapter[]
+     */
+    public function getLoggers()
+    {
+        return $this->loggers;
+    }
 }
