@@ -27,4 +27,22 @@ class DatabaseTest extends WplogTestCase
 
         $this->assertTrue((bool) $tableExists);
     }
+
+    function testItValidatesNeedToInstall()
+    {
+        delete_option('wplog_database_version');
+
+        $wpldb = new Database();
+
+        $this->assertTrue($wpldb->needsToInstallDatabase());
+    }
+
+    function testItValidatesNeedToUpdate()
+    {
+        update_option('wplog_database_version', 0);
+
+        $wpldb = new Database();
+
+        $this->assertTrue($wpldb->needsToUpdateDatabase());
+    }
 }
