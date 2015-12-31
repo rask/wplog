@@ -7,7 +7,8 @@ use Wprsrv\Logger;
 /**
  * Class Handler
  *
- * Registers log events for WP hooks.
+ * Registers log events for WP hooks and tells a logger collection to write the
+ * events this handler has registered.
  *
  * @since 0.1.0
  * @package Wplog\Events
@@ -52,7 +53,8 @@ class Handler
      * @since 0.1.0
      *
      * @param string $hook Hook to create listener for.
-     * @param \Wplog\Events\Listener $listener The closure that creates the event for the hook.
+     * @param \Wplog\Events\Listener $listener The closure that creates the event for
+     *                                         the hook.
      *
      * @return void
      */

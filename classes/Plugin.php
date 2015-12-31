@@ -73,6 +73,9 @@ class Plugin
     /**
      * Hook to WP.
      *
+     * Sets up database update checks and updates themselves. Then it sets up the
+     * event handler system.
+     *
      * @since 0.1.0
      * @return void
      */
@@ -89,6 +92,7 @@ class Plugin
     /**
      * Get a collection of loggers to use for logging events.
      *
+     * @since 0.1.0
      * @return \Wplog\Logging\LoggerCollection
      */
     public function getLoggerCollection()
@@ -123,6 +127,13 @@ class Plugin
 
     /**
      * Create event handlers.
+     *
+     * Creates a new handler using the base logger collection. Additionally registers
+     * a PHP shutdown function to handle the actual log writes for the logger
+     * collection.
+     *
+     * Listener definitions are read from a listener config file, and it can be
+     * filtered after loading. The handler then adds each listener to itself.
      *
      * @since 0.1.0
      * @access protected

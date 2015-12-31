@@ -4,7 +4,7 @@ namespace Wplog;
 
 /**
 * Plugin name: wplog
-* Description: Logging system for WordPress. Mainly for developers and other tinkerers.
+* Description: Logging system for WordPress. Keep track of changes in your WordPress installations using various logging endpoints.
 * Version: 0.1.0
 * Plugin URI:
 * Author: Otto J. Rask

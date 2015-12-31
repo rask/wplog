@@ -6,6 +6,13 @@ use Wplog\Support\Uuid;
 /**
  * Class Event
  *
+ * Events are the "things" which are logged. Events are mostly the very same stuff,
+ * but custom event types can be used to denote different types of events and
+ * possibly to add custom event mechanics for custom event log endpoints.
+ *
+ * Subclassing this and setting the `type` property to something descriptive is
+ * enough to define a custom type.
+ *
  * @since 0.1.0
  * @package Wplog\Events
  */

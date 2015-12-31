@@ -5,7 +5,23 @@ namespace Wplog\Events;
 /**
  * Class Listener
  *
- * A listener is an object which maps WP hooks to specific log event classes.
+ * A listener is an object which is used to listen for WP hook triggers and then
+ * generate a log event for the hook to pass to the logging system.
+ *
+ * A listener must define a Event class to use, and possible WP hook handling
+ * methods to use. The `onHookTrigger` is built to call handling methods as follows:
+ *
+ *     1. WP hook `save_post` is triggered.
+ *     2. Listener takes in the triggered hook name and arguments it was triggered
+ *        with.
+ *     3. The `onHookTrigger` method takes the hook name and generates a method name
+ *        `save_post` -> `onSavePost`.
+ *     4. If a Listener method called `onSavePost` exists, call it and return the
+ *        result (hopefully an Event object).
+ *
+ * The `onHookTrigger` can be overridden in subclasses to allow more custom hook
+ * handling, in case hook names are something else than the conventional `snake_case`
+ * WordPress style.
  *
  * @since 0.1.0
  * @package Wplog\Events
