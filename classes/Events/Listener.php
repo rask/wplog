@@ -83,7 +83,7 @@ abstract class Listener
      *
      * @return \Wplog\Events\Event
      */
-    protected function createEvent($args) : Event
+    protected function createEvent(array $args) : Event
     {
         /** @var \Wplog\Events\Event $event */
         $event = new static::$eventClass();

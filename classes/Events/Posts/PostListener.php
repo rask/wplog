@@ -32,7 +32,7 @@ class PostListener extends Listener
      *
      * @return \Wplog\Events\Event
      */
-    private function onWpInsertPost(array $args) : Event
+    protected function onWpInsertPost(array $args) : Event
     {
         $postId = array_shift($args);
         $postObj = array_shift($args);
