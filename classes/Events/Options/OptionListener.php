@@ -23,30 +23,6 @@ class OptionListener extends Listener
     protected static $eventClass = OptionEvent::class;
 
     /**
-     * Fired when a WP hook is triggered. Should generate arguments for a new event.
-     *
-     * @since 0.1.0
-     *
-     * @param mixed[] ...$args Arguments from the fired WP hook.
-     *
-     * @return mixed
-     */
-    public function onHookTrigger($hook, $args) : Event
-    {
-        $event = null;
-
-        switch ($hook) {
-
-            case 'updated_option':
-                $event = $this->onUpdatedOption($args);
-                break;
-
-        }
-
-        return $event;
-    }
-
-    /**
      * Option was updated.
      *
      * @since 0.1.0

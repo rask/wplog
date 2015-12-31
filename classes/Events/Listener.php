@@ -38,17 +38,27 @@ abstract class Listener
     protected static $eventClass = Event::class;
 
     /**
-     * Fired when a WP hook is triggered. Should generate arguments for a new event.
+     * Fired when a WP hook is triggered. Will proceed the triggered call to some
+     * other method which handles creating the loggable event.
      *
      * @since 0.1.0
-     * @abstract
      *
      * @param String $hook The hook which triggered this listener method.
      * @param mixed[] $args Arguments from the fired WP hook.
      *
-     * @return mixed
+     * @return \Wplog\Events\Event
      */
-    abstract public function onHookTrigger($hook, $args) : Event;
+    public function onHookTrigger($hook, array $args) : Event
+    {
+        // Generate a callable method name from hook.
+        $methodName = 'on' . implode(array_map('ucfirst', explode('_', $hook)));
+
+        if (method_exists($this, $methodName)) {
+            return $this->$methodName($args);
+        }
+
+        throw new \BadMethodCallException('Could not log event for WP hook `' . $hook . '`: listener ' . __CLASS__ . ' does not define handling method.');
+    }
 
     /**
      * Get the current logged in user ID for user reference in logs.

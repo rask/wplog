@@ -23,31 +23,6 @@ class PostListener extends Listener
     protected static $eventClass = PostEvent::class;
 
     /**
-     * Fired when a WP hook is triggered. Should generate arguments for a new event.
-     *
-     * @since 0.1.0
-     *
-     * @param String $hook The hook which triggered this listener method.
-     * @param mixed[] $args Arguments from the fired WP hook.
-     *
-     * @return mixed
-     */
-    public function onHookTrigger($hook, $args) : Event
-    {
-        $event = null;
-
-        switch ($hook) {
-
-            case 'wp_insert_post':
-                $event = $this->onWpInsertPost($args);
-                break;
-
-        }
-
-        return $event;
-    }
-
-    /**
      * Generate an event object for post insertions.
      *
      * @since 0.1.0
