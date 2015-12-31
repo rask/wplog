@@ -70,7 +70,7 @@ abstract class Event
      * @access protected
      * @var String
      */
-    protected $context;
+    protected $context = [];
 
     /**
      * If a user initiated the log event, the ID for the user.
