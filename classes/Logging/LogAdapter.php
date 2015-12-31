@@ -182,4 +182,29 @@ abstract class LogAdapter implements LoggerInterface
      * @return Boolean
      */
     abstract public function log($level, $message, array $context = [], Event $event = null) : bool;
+
+    /**
+     * Parse message context.
+     *
+     * @since 0.1.0
+     * @access protected
+     *
+     * @param String $message
+     * @param mixed[] $context
+     *
+     * @return String
+     */
+    protected function parseContext(string $message, array $context = []) : string
+    {
+        if (empty($context)) {
+            return $message;
+        }
+
+        foreach ($context as $key => $val) {
+            $key = '{' . $key . '}';
+            $message = str_replace($key, strval($val), $message);
+        }
+
+        return $message;
+    }
 }

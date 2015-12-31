@@ -73,29 +73,4 @@ class WpdbLogger extends LogAdapter
 
         return $inserted === 1;
     }
-
-    /**
-     * Parse message context.
-     *
-     * @since 0.1.0
-     * @access protected
-     *
-     * @param String $message
-     * @param mixed[] $context
-     *
-     * @return String
-     */
-    private function parseContext(string $message, array $context = []) : string
-    {
-        if (empty($context)) {
-            return $message;
-        }
-
-        foreach ($context as $key => $val) {
-            $key = '{' . $key . '}';
-            $message = str_replace($key, strval($val), $message);
-        }
-
-        return $message;
-    }
 }
