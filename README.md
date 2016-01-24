@@ -36,8 +36,13 @@ Custom log events can be created to keep log of your customized WP installations
 
 ## Installation
 
-Download a ZIP, unzip to your `plugins` directory and activate in `wp-admin`. By
-default the plugin will use the `$wpdb` logger.
+During development phase: clone this repo to your `wp-plugins` directory and run the
+following inside it
+
+    $ composer install && npm install
+    $ gulp
+
+and then activate in `wp-admin`. By default the plugin will use the `$wpdb` logger.
 
 ### Requirements
 
