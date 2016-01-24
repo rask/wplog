@@ -2,7 +2,7 @@
 
 namespace Wplog;
 
-use Wplog\Events\{Options, Posts};
+use Wplog\Events\{Options, Posts, Auth};
 
 return [
 

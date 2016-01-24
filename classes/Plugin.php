@@ -1,10 +1,9 @@
 <?php
 
 namespace Wplog;
+
 use Wplog\Database\Database;
 use Wplog\Events\Handler;
-use Wplog\Events\OptionListener;
-use Wplog\Events\PostListener;
 use Wplog\Logging\LogAdapter;
 use Wplog\Logging\LoggerCollection;
 use Wplog\Logging\WpdbLogger;
@@ -18,15 +17,6 @@ use Wplog\Logging\WpdbLogger;
 class Plugin
 {
     /**
-     * Database handler for the plugin.
-     *
-     * @since 0.1.0
-     * @access protected
-     * @var \Wplog\Database\Database
-     */
-    protected $database;
-
-    /**
      * Logging event handler.
      *
      * @since 0.1.0
@@ -34,41 +24,6 @@ class Plugin
      * @var \Wplog\Events\Handler
      */
     protected $handler;
-
-    /**
-     * Does the plugin need to be installed.
-     *
-     * @since 0.1.0
-     * @return Boolean
-     */
-    public function needsToInstall() : bool
-    {
-        $installedVersion = get_option('wplog_plugin_version', null);
-
-        return $installedVersion === null;
-    }
-
-    /**
-     * Validate whether the plugin needs to update. Run other updates not related to
-     * actual WP update framework updates depending on this value.
-     *
-     * @since 0.1.0
-     * @return Boolean
-     */
-    public function needsToUpdate() : bool
-    {
-        if ($this->needsToInstall()) {
-            return false;
-        }
-
-        $installedVersion = get_option('wplog_plugin_version');
-
-        if (!preg_match('%^\d+\.\d+\.\d+$%', $installedVersion)) {
-            throw new \UnexpectedValueException('Invalid semver version installed for plugin.');
-        }
-
-        return version_compare($installedVersion, WPLOG_VERSION, '<');
-    }
 
     /**
      * Hook to WP.
@@ -81,12 +36,31 @@ class Plugin
      */
     public function initialize()
     {
-        $this->database = new Database();
+        // Update plugin internals if needed.
+        add_action('init', [new Installer(), 'maybeInstallOrUpdatePlugin']);
 
         // Update database tables if needed.
-        add_action('init', [$this->database, 'maybeInstallOrUpdateTables']);
+        add_action('init', [new Database(), 'maybeInstallOrUpdateTables']);
 
+        // Setup the event handler that collects log events using listeners.
         $this->setupEventHandler();
+
+        if (is_admin()) {
+            $this->initializeAdmin();
+        }
+    }
+
+    /**
+     * Initialize admin panel side for plugin.
+     *
+     * @since 0.1.0
+     * @return void
+     */
+    public function initializeAdmin()
+    {
+        $optionsPage = new Admin\Options();
+
+        add_action('admin_menu', [$optionsPage, 'adminMenu']);
     }
 
     /**
