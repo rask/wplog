@@ -37,33 +37,4 @@ class PluginTest extends WplogTestCase
             $this->assertTrue(is_plugin_active($pid));
         }
     }
-
-    function testItValidatesPluginInstallAndUpdateNeed()
-    {
-        $plugin = new Plugin();
-
-        delete_option('wplog_plugin_version');
-
-        $needsInstall = $plugin->needsToInstall();
-        $needsUpdate = $plugin->needsToUpdate();
-
-        $this->assertTrue($needsInstall, 'Needs to install, case 1');
-        $this->assertFalse($needsUpdate, 'Needs to update, case 1');
-
-        update_option('wplog_plugin_version', WPLOG_VERSION);
-
-        $needsInstall = $plugin->needsToInstall();
-        $needsUpdate = $plugin->needsToUpdate();
-
-        $this->assertFalse($needsInstall, 'Needs to install, case 2');
-        $this->assertFalse($needsUpdate, 'Needs to update, case 2');
-
-        update_option('wplog_plugin_version', '0.0.0');
-
-        $needsInstall = $plugin->needsToInstall();
-        $needsUpdate = $plugin->needsToUpdate();
-
-        $this->assertFalse($needsInstall, 'Needs to install, case 3');
-        $this->assertTrue($needsUpdate, 'Needs to update, case 3');
-    }
 }
