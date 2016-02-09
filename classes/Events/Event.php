@@ -99,6 +99,50 @@ abstract class Event
     }
 
     /**
+     * String conversion for events. Return a log line like string that can be
+     * directly printed to a logfile for instance.
+     *
+     * Outputs a text string formatted as such:
+     *
+     *     <uuid> | <timestamp> [Severity: <severity>, Type: <type>, User ID: <user id>]: <message>
+     *
+     * @todo validate the format is close enough to conventional log formats.
+     *
+     * @since 0.1.0
+     * @return String
+     */
+    public function __toString() : string
+    {
+        $msgBody = function () {
+            if (!is_array($this->context) || empty($this->context)) {
+                return $this->body;
+            }
+
+            $msg = $this->body;
+
+            foreach ($this->context as $k => $v) {
+                $msg = str_replace('{' . $k . '}', $v, $msg);
+            }
+
+            return $msg;
+        };
+
+        $logLine = vsprintf(
+            '%s | %s [Severity: %s, Type: %s, User ID: %s]: %s',
+            [
+                $this->uuid,
+                $this->getTimestamp(),
+                $this->getSeverity(),
+                $this->getType(),
+                $this->getUserId(),
+                $msgBody()
+            ]
+        );
+
+        return $logLine;
+    }
+
+    /**
      * Get the UTC timestamp for this event.
      *
      * @since 0.1.0
