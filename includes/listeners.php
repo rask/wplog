@@ -2,7 +2,7 @@
 
 namespace Wplog;
 
-use Wplog\Events\{Options, Posts, Auth};
+use Wplog\Events\{Options, Posts, Auth, Core};
 
 return [
 
@@ -25,6 +25,11 @@ return [
      * User login/logout.
      */
     'wp_login' => Auth\AuthListener::class,
-    'clear_auth_cookie' => Auth\AuthListener::class
+    'clear_auth_cookie' => Auth\AuthListener::class,
+
+    /**
+     * Core upgrades.
+     */
+    'upgrader_process_complete' => Core\CoreListener::class,
 
 ];
