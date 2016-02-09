@@ -85,11 +85,23 @@ class Handler
             return;
         }
 
+        // Prune null events.
+        $this->listenerEvents = array_filter(
+            $this->listenerEvents,
+            function ($eventObject) {
+                return !$eventObject instanceof NullEvent;
+            }
+        );
+
         foreach ($this->listenerEvents as $event) {
             try {
                 $this->loggerCollection->write($event);
             } catch (\Throwable $t) {
-                //FIXME internal logging
+                \Wplog\wplog()->internalLogger()
+                    ->alert(
+                        'Could not write log entry: {msg}',
+                        ['msg' => $t->getMessage()]
+                    );
             }
         }
     }
