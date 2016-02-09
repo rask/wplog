@@ -7,6 +7,11 @@ use Wplog\Logging\LoggerCollection;
 use Wplog\Logging\Wpdb\Logger as WpdbLogger;
 use Wplog\Tests\WplogTestCase;
 
+/**
+ * Class LoggerCollectionTest
+ *
+ * @package Wplog\Tests\Logging
+ */
 class LoggerCollectionTest extends WplogTestCase
 {
     function testItCanAddLoggers()

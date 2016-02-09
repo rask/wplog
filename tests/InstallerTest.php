@@ -4,6 +4,11 @@ namespace Wplog\Tests;
 
 use Wplog\Installer;
 
+/**
+ * Class InstallerTest
+ *
+ * @package Wplog\Tests
+ */
 class InstallerTest extends WplogTestCase
 {
     function testItInstallsPlugin()
