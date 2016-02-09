@@ -2,7 +2,7 @@
 
 namespace Wplog;
 
-use Wplog\Logging\WpdbLogger;
+use Wplog\Logging\Wpdb\Logger as WpdbLogger;
 
 /**
  * options.php

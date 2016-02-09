@@ -4,9 +4,10 @@ namespace Wplog;
 
 use Wplog\Database\Database;
 use Wplog\Events\Handler;
+use Wplog\Logging\InternalLogger;
 use Wplog\Logging\LogAdapter;
 use Wplog\Logging\LoggerCollection;
-use Wplog\Logging\WpdbLogger;
+use Wplog\Logging\Wpdb\Logger as WpdbLogger;
 
 /**
  * Class Plugin

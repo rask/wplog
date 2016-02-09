@@ -4,7 +4,7 @@ namespace Wplog\Tests\Logging;
 
 use Wplog\Events\Options\OptionEvent;
 use Wplog\Logging\LoggerCollection;
-use Wplog\Logging\WpdbLogger;
+use Wplog\Logging\Wpdb\Logger as WpdbLogger;
 use Wplog\Tests\WplogTestCase;
 
 class LoggerCollectionTest extends WplogTestCase

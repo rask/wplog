@@ -1,17 +1,18 @@
 <?php
 
-namespace Wplog\Logging;
+namespace Wplog\Logging\Wpdb;
 
 use Wplog\Events\Event;
+use Wplog\Logging\LogAdapter;
 use Wplog\Support\Uuid;
 
 /**
- * Class WpdbLogger
+ * Class Logger
  *
  * @since 0.1.0
- * @package Wplog\Logging
+ * @package Wplog\Logging\Wpdb
  */
-class WpdbLogger extends LogAdapter
+class Logger extends LogAdapter
 {
     /**
      * $wpdb instance mapped for this logger.

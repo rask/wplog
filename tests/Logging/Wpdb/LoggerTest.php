@@ -1,19 +1,24 @@
 <?php
 
-namespace Wplog\Tests\Logging;
+namespace Wplog\Tests\Logging\Wpdb;
 
 use Wplog\Events\Options\OptionEvent;
-use Wplog\Logging\WpdbLogger;
+use Wplog\Logging\Wpdb\Logger;
 use Wplog\Tests\WplogTestCase;
 use Psr\Log\LogLevel;
 
-class WpdbLoggerTest extends WplogTestCase
+/**
+ * Class LoggerTest
+ *
+ * @package Wplog\Tests\Logging\Wpdb
+ */
+class LoggerTest extends WplogTestCase
 {
     function testItWritesLogsToDatabase()
     {
         global $wpdb;
 
-        $logger = new WpdbLogger();
+        $logger = new Logger();
         $event = new OptionEvent();
 
         $event->setBody('Hello World {user}!');
