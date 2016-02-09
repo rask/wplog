@@ -26,6 +26,15 @@ class Plugin
     protected $handler;
 
     /**
+     * Internal logger for plugin internal logging.
+     *
+     * @since 0.1.0
+     * @access protected
+     * @var \Wplog\Logging\InternalLogger
+     */
+    protected $logger = null;
+
+    /**
      * Hook to WP.
      *
      * Sets up database update checks and updates themselves. Then it sets up the
@@ -48,6 +57,23 @@ class Plugin
         if (is_admin()) {
             $this->initializeAdmin();
         }
+    }
+
+    /**
+     * Get the internal logger instance for plugin specific logging purposes.
+     *
+     * @since 0.1.0
+     * @return \Wplog\Logging\InternalLogger
+     */
+    public function internalLogger() : InternalLogger
+    {
+        if ($this->logger instanceof InternalLogger) {
+            return $this->logger;
+        }
+
+        $this->logger = new InternalLogger();
+
+        return $this->logger;
     }
 
     /**
