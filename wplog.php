@@ -17,7 +17,7 @@ namespace Wplog;
 define('WPLOG_VERSION', '0.1.0');
 define('WPLOG_DB_VERSION', 1);
 define('WPLOG_DIR', __DIR__);
-define('WPLOG_GITHUB_REPO_ID', null);
+define('WPLOG_GITHUB_REPO_ID', 'rask/wplog');
 define('WPLOG_PLUGIN_DIR_ID', basename(__DIR__) . '/' . basename(__FILE__));
 
 /**
